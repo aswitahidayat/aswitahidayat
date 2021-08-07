@@ -33,7 +33,7 @@ db.mongoose
 
 redisConfig.client.on('ready', function () {
 	console.log('Successfully connect to Redis.');
-}).on('error', function () {
+}).on('error', function (err) {
 	console.log('Redis not connected!' , err);
 });
 
