@@ -2,11 +2,10 @@ const db = require("../models");
 const { user: User, refreshToken: RefreshToken } = db;
 const bcrypt = require("bcryptjs");
 
-const redis = require('redis')
-var client = redis.createClient()
+const redisConfig = require("../config/redisConfig")
 
 function setRedis(key, data){
-	client.set(key, JSON.stringify(data));
+	redisConfig.client.set(key, JSON.stringify(data));
 }
 
 exports.getAllUser = async (req, res) => {
@@ -78,7 +77,7 @@ exports.updateUser = async (req, res) => {
 				identityNumber: req.body.identityNumber,
 				password: bcrypt.hashSync(req.body.password, 8),
 			};
-			client.del(req.params.id);
+			redisConfig.client.del(req.params.id);
 			await User.updateOne({ _id: uid }, userData);
 			res.status(200).send({ message: "User was successfully updated!" });
 		});

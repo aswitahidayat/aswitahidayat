@@ -7,6 +7,10 @@ const client = redis.createClient({
   password: process.env.REDIS_PASSWORD,
 });
 
+client.on('connect', () => {
+  require('bluebird').promisifyAll(redis)
+})
+
 // client.on('ready', function () {
 // 	console.log('Successfully connect to Redis.');
 // }).on('error', function () {
