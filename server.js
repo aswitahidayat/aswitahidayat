@@ -31,9 +31,9 @@ db.mongoose
 	});
 
 
-redisConfig.client.on('ready', function () {
+redisConfig.client.on('ready', () => {
 	console.log('Successfully connect to Redis.');
-}).on('error', function () {
+}).on('error', () => {
 	console.log('Redis not connected!');
 });
 
