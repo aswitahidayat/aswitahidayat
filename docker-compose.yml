@@ -26,7 +26,6 @@ services:
     image: "redis"
     volumes:
       - ./data/redis:/redis/db
-      - ./redis.conf:/data/redis
     ports:
       - "6379:6379"
     expose:
